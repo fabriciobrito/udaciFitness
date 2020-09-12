@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { getMetricMetaInfo, timeToString } from '../utils/helpers';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DateHeader from './DateHeader';
 import UdaciSlider from './UdaciSlider';
 import UdaciStepper from './UdaciStepper'
+import TextButton from './TextButton';
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -64,9 +66,28 @@ export default class AddEntry extends Component {
     // Navigate Home
     // Save to Database
     // Clear Local Notifications
+  };
+  reset = () => {
+    const key = timeToString();
+    // ToDo List
+    // Update Redux
+    // Route to home
+    // Update Database
   }
   render() {
     const metaInfo = getMetricMetaInfo();
+    if(this.props.alreadyLogged) {
+      return(
+        <View>
+          <MaterialCommunityIcons
+            name="emoticon-happy-outline" size={100} color="black" />
+          <Text>You already Logged your information for today</Text>
+          <TextButton onPress={this.reset}>
+            Reset
+          </TextButton>
+        </View>
+      )
+    }
     return(
       <View>
         <DateHeader date={new Date().toLocaleDateString()} />
