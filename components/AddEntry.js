@@ -6,6 +6,7 @@ import DateHeader from './DateHeader';
 import UdaciSlider from './UdaciSlider';
 import UdaciStepper from './UdaciStepper'
 import TextButton from './TextButton';
+import { submitEntry, removeEntry } from '../utils/api'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -64,7 +65,7 @@ export default class AddEntry extends Component {
       eat: 0
     }))
     // Navigate Home
-    // Save to Database
+    submitEntry({ entry, key });
     // Clear Local Notifications
   };
   reset = () => {
@@ -72,7 +73,7 @@ export default class AddEntry extends Component {
     // ToDo List
     // Update Redux
     // Route to home
-    // Update Database
+    removeEntry(key);
   }
   render() {
     const metaInfo = getMetricMetaInfo();
